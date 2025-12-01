@@ -78,3 +78,12 @@
     rgba(255, 255, 255, 0) 100%
   );
 }
+.light-button button.bt:hover .light-holder .light {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    180deg,
+    rgba(88, 101, 242, 1) 0%,
+    rgba(255, 255, 255, 0) 75%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
