@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zankoline</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        
+        footer {
+            background: linear-gradient(to top, #0a0a0a, #151515);
+            padding: 50px 20px 30px;
+            border-top: 1px solid rgba(88, 101, 242, 0.3);
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .social-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .section-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: rgba(88, 101, 242, 1);
+            position: relative;
+            padding-right: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 20px;
+            background: rgba(88, 101, 242, 1);
+            border-radius: 3px;
+        }
+        
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding: 20px;
+            background: rgba(20, 20, 20, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .copyright p {
+            margin: 5px 0;
+            font-size: 1.1rem;
+        }
+        
+        .copyright .year {
+            color: rgba(88, 101, 242, 1);
+            font-weight: bold;
+        }
+        
+        .website-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: flex-end;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 1.8rem;
+            background: linear-gradient(45deg, rgba(88, 101, 242, 1), #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(88, 101, 242, 0.3);
+        }
+        
+        .logo-icon {
+            font-size: 1.8rem;
+            color: rgba(88, 101, 242, 1);
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        
+        .detail-icon {
+            color: rgba(88, 101, 242, 1);
+            font-size: 1.2rem;
+        }
+        
+        /* Enhanced Light Button Styles */
+        .light-button {
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .light-button:hover {
+            transform: translateY(-5px);
+        }
+        
+        .light-button button.bt {
+            position: relative;
+            height: 120px;
+            display: flex;
+            align-items: flex-end;
+            outline: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .light-button button.bt .button-holder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80px;
+            width: 80px;
+            background-color: #0a0a0a;
+            border-radius: 10px;
+            color: #0f0f0f;
+            font-weight: 700;
+            transition: 300ms;
+            outline: #0f0f0f 2px solid;
+            outline-offset: 20;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .light-button button.bt .button-holder svg {
+            height: 35px;
+            fill: #0f0f0f;
+            transition: 300ms;
+        }
+        
+        .light-button button.bt .button-holder p {
+            font-size: 0.8rem;
+            margin-top: 5px;
+            transition: 300ms;
+        }
+
+        .light-button button.bt .light-holder {
+            position: absolute;
+            height: 120px;
+            width: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .light-button button.bt .light-holder .dot {
+            position: absolute;
+            top: 0;
+            width: 8px;
+            height: 8px;
+            background-color: #0a0a0a;
+            border-radius: 10px;
+            z-index: 2;
+            transition: 300ms;
+        }
+
+        .light-button button.bt .light-holder .light {
+            position: absolute;
+            top: 0;
+            width: 160px;
+            height: 120px;
+            clip-path: polygon(50% 0%, 25% 100%, 75% 100%);
+            background: transparent;
+            transition: 300ms;
+            opacity: 0;
+        }
+
+        .light-button button.bt:hover .button-holder svg {
+            fill: rgba(88, 101, 242, 1);
+        }
+
+        .light-button button.bt:hover .button-holder {
+            color: rgba(88, 101, 242, 1);
+            outline: rgba(88, 101, 242, 1) 2px solid;
+            outline-offset: 2px;
+            transform: scale(1.05);
+        }
+
+        .light-button button.bt:hover .light-holder .light {
+            background: rgb(255, 255, 255);
+            background: linear-gradient(180deg,
+                    rgba(88, 101, 242, 0.7) 0%,
+                    rgba(255, 255, 255, 0) 75%,
+                    rgba(255, 255, 255, 0) 100%);
+            opacity: 1;
+        }
+        
+        .light-button button.bt:hover .light-holder .dot {
+            background-color: rgba(88, 101, 242, 1);
+            box-shadow: 0 0 10px rgba(88, 101, 242, 0.7);
+        }
+        
+        /* Social media specific colors */
+        .facebook-btn:hover .button-holder svg {
+            fill: #1877F2 !important;
+        }
+        
+        .facebook-btn:hover .button-holder {
+            color: #1877F2 !important;
+            outline: #1877F2 2px solid !important;
+        }
+        
+        .facebook-btn:hover .light-holder .light {
+            background: linear-gradient(180deg,
+                    rgba(24, 119, 242, 0.7) 0%,
+                    rgba(255, 255, 255, 0) 75%,
+                    rgba(255, 255, 255, 0) 100%) !important;
+        }
+        
+        .facebook-btn:hover .light-holder .dot {
+            background-color: #1877F2 !important;
+            box-shadow: 0 0 10px rgba(24, 119, 242, 0.7) !important;
+        }
+        
+        .telegram-btn:hover .button-holder svg {
+            fill: #0088cc !important;
+        }
+        
+        .telegram-btn:hover .button-holder {
+            color: #0088cc !important;
+            outline: #0088cc 2px solid !important;
+        }
+        
+        .telegram-btn:hover .light-holder .light {
+            background: linear-gradient(180deg,
+                    rgba(0, 136, 204, 0.7) 0%,
+                    rgba(255, 255, 255, 0) 75%,
+                    rgba(255, 255, 255, 0) 100%) !important;
+        }
+        
+        .telegram-btn:hover .light-holder .dot {
+            background-color: #0088cc !important;
+            box-shadow: 0 0 10px rgba(0, 136, 204, 0.7) !important;
+        }
+        
+        .viber-btn:hover .button-holder svg {
+            fill: #7360F2 !important;
+        }
+        
+        .viber-btn:hover .button-holder {
+            color: #7360F2 !important;
+            outline: #7360F2 2px solid !important;
+        }
+        
+        .viber-btn:hover .light-holder .light {
+            background: linear-gradient(180deg,
+                    rgba(115, 96, 242, 0.7) 0%,
+                    rgba(255, 255, 255, 0) 75%,
+                    rgba(255, 255, 255, 0) 100%) !important;
+        }
+        
+        .viber-btn:hover .light-holder .dot {
+            background-color: #7360F2 !important;
+            box-shadow: 0 0 10px rgba(115, 96, 242, 0.7) !important;
+        }
+        
+        .whatsapp-btn:hover .button-holder svg {
+            fill: #25D366 !important;
+        }
+        
+        .whatsapp-btn:hover .button-holder {
+            color: #25D366 !important;
+            outline: #25D366 2px solid !important;
+        }
+        
+        .whatsapp-btn:hover .light-holder .light {
+            background: linear-gradient(180deg,
+                    rgba(37, 211, 102, 0.7) 0%,
+                    rgba(255, 255, 255, 0) 75%,
+                    rgba(255, 255, 255, 0) 100%) !important;
+        }
+        
+        .whatsapp-btn:hover .light-holder .dot {
+            background-color: #25D366 !important;
+            box-shadow: 0 0 10px rgba(37, 211, 102, 0.7) !important;
+        }
+        
+        /* Footer bottom section */
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 900px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+            
+            .social-section, .website-details {
+                align-items: center;
+            }
+            
+            .social-buttons {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .social-buttons {
+                gap: 10px;
+            }
+            
+            .light-button button.bt {
+                height: 110px;
+            }
+            
+            .light-button button.bt .button-holder {
+                height: 70px;
+                width: 70px;
+            }
+            
+            .light-button button.bt .light-holder {
+                height: 110px;
+                width: 70px;
+            }
+            
+            .light-button button.bt .button-holder svg {
+                height: 30px;
+            }
+            
+            .light-button button.bt .button-holder p {
+                font-size: 0.7rem;
+            }
+        }
+        
+        /* Animation for elements */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .social-section, .copyright, .website-details {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .social-section {
+            animation-delay: 0.1s;
+        }
+        
+        .copyright {
+            animation-delay: 0.2s;
+        }
+        
+        .website-details {
+            animation-delay: 0.3s;
+        }
+        
+        /* Hover effects for detail items */
+        .detail-item {
+            transition: transform 0.3s ease;
+        }
+        
+        .detail-item:hover {
+            transform: translateX(-5px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <!-- Your existing Discord button -->
+        <div class="light-button">
+            <button class="bt">
+                <div class="light-holder">
+                    <div class="dot"></div>
+                    <div class="light"></div>
+                </div>
+                <div class="button-holder">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img">
+                        <path
+                            d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z">
+                        </path>
+                    </svg>
+                    <p>Discord</p>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="social-section">
+                <h3 class="section-title">تابعنا على</h3>
+                <div class="social-buttons">
+                    <!-- Facebook Button -->
+                    <div class="light-button facebook-btn">
+                        <button class="bt">
+                            <div class="light-holder">
+                                <div class="dot"></div>
+                                <div class="light"></div>
+                            </div>
+                            <div class="button-holder">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img">
+                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                </svg>
+                                <p>Facebook</p>
+                            </div>
+                        </button>
+                    </div>
+                    
+                    <!-- Telegram Button -->
+                    <div class="light-button telegram-btn">
+                        <button class="bt">
+                            <div class="light-holder">
+                                <div class="dot"></div>
+                                <div class="light"></div>
+                            </div>
+                            <div class="button-holder">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img">
+                                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.155c-.163.227-3.554 3.399-7.425 7.093-.431.422-.862.439-1.238.1-.394-.356-1.387-1.357-2.106-2.071-.751-.744-1.45-1.521-1.45-1.521s4.329-3.84 7.138-6.35c.362-.322.725-.343 1.103-.1.394.256 2.494 2.327 4.988 4.649z"/>
+                                </svg>
+                                <p>Telegram</p>
+                            </div>
+                        </button>
+                    </div>
+                    
+                    <!-- Viber Button -->
+                    <div class="light-button viber-btn">
+                        <button class="bt">
+                            <div class="light-holder">
+                                <div class="dot"></div>
+                                <div class="light"></div>
+                            </div>
+                            <div class="button-holder">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img">
+                                    <path d="M7.844 0C3.52 0 0 3.43 0 7.656v8.688C0 20.57 3.52 24 7.844 24h8.312C20.48 24 24 20.57 24 16.344V7.656C24 3.43 20.48 0 16.156 0H7.844zm11.14 5.063c.293 0 .574.117.78.324.207.206.324.487.324.78 0 .292-.117.573-.324.78a1.104 1.104 0 01-1.56 0 1.1 1.1 0 010-1.56c.206-.207.487-.324.78-.324zm-3.375 1.125c.293 0 .574.117.78.324.207.206.324.487.324.78 0 .292-.117.573-.324.78a1.104 1.104 0 01-1.56 0 1.1 1.1 0 010-1.56c.206-.207.487-.324.78-.324zM12 6.75c2.896 0 5.25 2.354 5.25 5.25s-2.354 5.25-5.25 5.25S6.75 14.896 6.75 12 9.104 6.75 12 6.75zm0 1.5c-2.07 0-3.75 1.68-3.75 3.75S9.93 15.75 12 15.75s3.75-1.68 3.75-3.75S14.07 8.25 12 8.25z"/>
+                                </svg>
+                                <p>Viber</p>
+                            </div>
+                        </button>
+                    </div>
+                    
+                    <!-- WhatsApp Button -->
+                    <div class="light-button whatsapp-btn">
+                        <button class="bt">
+                            <div class="light-holder">
+                                <div class="dot"></div>
+                                <div class="light"></div>
+                            </div>
+                            <div class="button-holder">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.59"/>
+                                </svg>
+                                <p>WhatsApp</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة <span class="year">2023</span></p>
+                <p>Zankoline &copy;</p>
+            </div>
+            
+            <div class="website-details">
+                <div class="logo-container">
+                    <i class="logo-icon fas fa-cube"></i>
+                    <div class="logo">Zankoline</div>
+                </div>
+                
+                <div class="detail-item">
+                    <i class="detail-icon fas fa-globe"></i>
+                    <span>www.zankoline.com</span>
+                </div>
+                
+                <div class="detail-item">
+                    <i class="detail-icon fas fa-map-marker-alt"></i>
+                    <span>الرياض، المملكة العربية السعودية</span>
+                </div>
+                
+                <div class="detail-item">
+                    <i class="detail-icon fas fa-envelope"></i>
+                    <span>info@zankoline.com</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>تم التصميم بتقنيات حديثة | Zankoline © 2023</p>
+        </div>
+    </footer>
+</body>
+</html>
